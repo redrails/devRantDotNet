@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devRantDotNet", "devRantDotNet\devRantDotNet.csproj", "{02BC45A3-F4B7-474A-A279-392D3D3332EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devRantTests", "devRantTests\devRantTests.csproj", "{95FADFA9-BEE3-4BB2-8A09-5B4A8AD79D60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02BC45A3-F4B7-474A-A279-392D3D3332EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02BC45A3-F4B7-474A-A279-392D3D3332EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02BC45A3-F4B7-474A-A279-392D3D3332EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02BC45A3-F4B7-474A-A279-392D3D3332EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95FADFA9-BEE3-4BB2-8A09-5B4A8AD79D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95FADFA9-BEE3-4BB2-8A09-5B4A8AD79D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95FADFA9-BEE3-4BB2-8A09-5B4A8AD79D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95FADFA9-BEE3-4BB2-8A09-5B4A8AD79D60}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
