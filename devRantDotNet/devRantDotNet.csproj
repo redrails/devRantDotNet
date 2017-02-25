@@ -48,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Models\Comment.cs" />
     <Compile Include="Source\Models\Rant.cs" />
+    <Compile Include="Source\Models\User.cs" />
     <Compile Include="Source\Resources\Values.cs" />
   </ItemGroup>
   <ItemGroup>

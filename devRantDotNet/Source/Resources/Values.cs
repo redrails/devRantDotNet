@@ -13,6 +13,7 @@ namespace devRantDotNet
         internal const string UsernameById = API + "/get-user-id";
         internal const string AllRants = API + "/devrant/rants";
         internal const string SingleRant = API + "/devrant/rants/";
+        internal const string User = API + "/users/";
 
     }
 }

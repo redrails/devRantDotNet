@@ -9,14 +9,37 @@ namespace devRantTests
 {
     class Program
     {
+        static devRant dr = new devRant();
+
+        public static void getAllRants()
+        {
+            dr.GetRants(devRant.SortType.recent).ForEach(r => Console.WriteLine(r.text));
+        }
+
+        public static void getSingleRant(int id)
+        {
+            dr.GetRant(id).rant_comments.ForEach(
+                c => Console.WriteLine(c.user_username + ": " + c.body)
+            );
+        }
+
+        public static void getUserId(string username)
+        {
+            Console.WriteLine(dr.GetUserId(username));
+        }
+
+        public static void getUserProfile(int id)
+        {
+            var user = dr.GetUser(id);
+            var dump = ObjectDumper.Dump(user);
+            Console.WriteLine(dump);
+        }
+
         static void Main(string[] args)
         {
-            var x = new devRant();
-            //x.GetRants().ForEach(r => Console.WriteLine(r.text));
-
-            x.GetRant(448338).rant_comments.ForEach(
-                c => Console.WriteLine(c.user_username +": "+ c.body)
-            );
+            getAllRants();
+            //getSingleRant(448338);
+            //getUserProfile(dr.GetUserId("px06"));
             Console.ReadLine();
         }
     }
