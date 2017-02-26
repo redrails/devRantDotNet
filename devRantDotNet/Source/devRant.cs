@@ -159,7 +159,7 @@ namespace devRantDotNet
             catch { return 0; }
         }
 
-        public User GetUser(long id)
+        public User GetProfile(long id)
         {
             try
             {
@@ -211,6 +211,34 @@ namespace devRantDotNet
                 return user;
             }
             catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public List<Rant> Search(string term)
+        {
+            try
+            {
+                var req = MakeRequest(Values.Search + "?term=" + term + "&app=3");
+                dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
+
+                if (results.success != "true")
+                {
+                    throw new Exception("Something went wrong!");
+                }
+
+                List<Rant> search_results = new List<Rant>();
+
+                for (var i = 0; i < results.results.Count; i++)
+                {
+                    search_results.Add(JSONToRantObject(results.results[i]));
+                }
+
+                return search_results;
+
+            }
+            catch
             {
                 return null;
             }

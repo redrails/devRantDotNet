@@ -14,6 +14,6 @@ namespace devRantDotNet
         internal const string AllRants = API + "/devrant/rants";
         internal const string SingleRant = API + "/devrant/rants/";
         internal const string User = API + "/users/";
-
+        internal const string Search = API + "/devrant/search";
     }
 }

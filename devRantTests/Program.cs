@@ -30,16 +30,23 @@ namespace devRantTests
 
         public static void getUserProfile(int id)
         {
-            var user = dr.GetUser(id);
+            var user = dr.GetProfile(id);
             var dump = ObjectDumper.Dump(user);
             Console.WriteLine(dump);
         }
 
+        public static void getSearchResults(string q)
+        {
+            var results = dr.Search(q);
+            results.ForEach(r => Console.WriteLine(r.text));
+        }
+
         static void Main(string[] args)
         {
-            getAllRants();
+            //getAllRants();
             //getSingleRant(448338);
             //getUserProfile(dr.GetUserId("px06"));
+            getSearchResults("px06");
             Console.ReadLine();
         }
     }
