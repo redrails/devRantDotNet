@@ -2,6 +2,10 @@ Unofficial C# Wrapper for the [devRant](https://www.devrant.io/) public API.
 
 ![](https://www.devrant.io/static/devrant/img/landing/landing-avatars2.png)
 
+# devRantDotNet
+
+This is a library written in C#.NET for access to the devRant API. It aims to provide serialization on the components received so you can easily make use of the library to build applications and other code.
+
 # Prerequisites
 
 - .NET Framework 4+
@@ -29,10 +33,6 @@ namespace MyProject
 ```
 
 Most methods are available in this library with some ongoing work on improving it. All methods are Async.
-
-# devRantDotNet
-
-This is a library written in C#.NET for access to the devRant API. It aims to provide serialization on the components received so you can easily make use of the library to build applications and other code.
 
 # Usage and Documentation
 
