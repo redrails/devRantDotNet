@@ -25,7 +25,7 @@ namespace MyProject
 			}
 		}
 	}
-
+}
 ```
 
 Most methods are available in this library with some ongoing work on improving it. All methods are Async.
