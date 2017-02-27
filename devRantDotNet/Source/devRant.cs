@@ -15,7 +15,7 @@ namespace devRantDotNet
     /// <summary>
     /// A C# Wrapper for the devRant API
     /// </summary>
-    public class devRant
+    public class devRant : IDisposable
     {
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace devRantDotNet
             /// </summary>
             recent
         }
-
+        
         /// <summary>
         /// Uses <see cref="HttpWebRequest"/> and <see cref="HttpWebResponse"/> to create requests to the API.
         /// Returns the JSON result.
@@ -319,6 +319,11 @@ namespace devRantDotNet
             {
                 return null;
             }
+        }
+
+        public void Dispose()
+        {
+            //throw new NotImplementedException();
         }
     }
 }

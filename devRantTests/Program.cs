@@ -53,11 +53,14 @@ namespace devRantTests
 
         static void Main(string[] args)
         {
-            getAllRants();
-            getSearchResults("px06");
-            getSingleRant(448369);
-            getUserProfile(getUserId("px06").Result);
-
+            //getAllRants();
+            //getSearchResults("px06");
+            //getSingleRant(448369);
+            //getUserProfile(getUserId("px06").Result);
+            using(var api = new devRant())
+            {
+                Console.WriteLine(api.GetUserIdAsync("px06").Result);
+            }
             Console.ReadLine();
         }
     }
