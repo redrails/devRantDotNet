@@ -96,6 +96,11 @@ namespace devRantDotNet
             return comment;
         }
 
+        /// <summary>
+        /// Returns all the rants from the feed at: https://www.devrant.io/feed
+        /// </summary>
+        /// <param name="type"> Type of sort e.g. Top, Algo or Recent</param>
+        /// <returns>A List of Rants which are iterable</returns>
         public List<Rant> GetRants(SortType type)
         {
             var req = MakeRequest(Values.AllRants+"?sort="+type+"&app=3");
@@ -244,5 +249,19 @@ namespace devRantDotNet
             }
         }
 
+        public Rant GetRandomRant()
+        {
+            try
+            {
+                var req = MakeRequest(Values.Random + Values.AppId);
+                dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
+
+                return results.success == "true" ? JSONToRantObject(results.rant) : null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

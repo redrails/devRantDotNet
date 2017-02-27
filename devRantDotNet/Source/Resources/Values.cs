@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace devRantDotNet
 {
-    public static class Values
+    internal static class Values
     {
         internal const string API = "https://www.devrant.io/api";
         internal const string AppId = "?app=3";
@@ -15,5 +15,6 @@ namespace devRantDotNet
         internal const string SingleRant = API + "/devrant/rants/";
         internal const string User = API + "/users/";
         internal const string Search = API + "/devrant/search";
+        internal const string Random = API + "/devrant/rants/surprise";
     }
 }

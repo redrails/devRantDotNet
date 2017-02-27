@@ -19,7 +19,7 @@ namespace devRantTests
         public static void getSingleRant(int id)
         {
             dr.GetRant(id).rant_comments.ForEach(
-                c => Console.WriteLine(c.user_username + ": " + c.body)
+                c => Console.WriteLine(c.user_username + ": " + c.body +"("+c.id+")")
             );
         }
 
@@ -41,12 +41,23 @@ namespace devRantTests
             results.ForEach(r => Console.WriteLine(r.text));
         }
 
+        public static void getRandomRant()
+        {
+            var dump = ObjectDumper.Dump(dr.GetRandomRant());
+            Console.WriteLine(dump);
+        }
+
         static void Main(string[] args)
         {
             //getAllRants();
-            //getSingleRant(448338);
             //getUserProfile(dr.GetUserId("px06"));
-            getSearchResults("px06");
+            //getSearchResults("px06");
+            //getSingleRant(448369);
+
+            getRandomRant();
+            Console.WriteLine("-----------------------------------");
+            getUserProfile(dr.GetUserId("px06"));
+
             Console.ReadLine();
         }
     }
