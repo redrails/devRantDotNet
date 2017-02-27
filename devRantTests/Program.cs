@@ -11,52 +11,52 @@ namespace devRantTests
     {
         static devRant dr = new devRant();
 
-        public static void getAllRants()
+        public static async void getAllRants()
         {
-            dr.GetRants(devRant.SortType.recent).ForEach(r => Console.WriteLine(r.text));
+            var res = await dr.GetRantsAsync(devRant.SortType.recent);
+            res.ForEach(r => Console.WriteLine(r.text));
         }
 
-        public static void getSingleRant(int id)
+        public static async void getSingleRant(int id)
         {
-            dr.GetRant(id).rant_comments.ForEach(
+            var res = await dr.GetRantAsync(id);
+            res.rant_comments.ForEach(
                 c => Console.WriteLine(c.user_username + ": " + c.body +"("+c.id+")")
             );
         }
 
-        public static void getUserId(string username)
+        public static async Task<int> getUserId(string username)
         {
-            Console.WriteLine(dr.GetUserId(username));
+            var res = await dr.GetUserIdAsync(username);
+            Console.WriteLine(res);
+            return res;
         }
 
-        public static void getUserProfile(int id)
+        public static async void getUserProfile(int id)
         {
-            var user = dr.GetProfile(id);
+            var user = await dr.GetProfileAsync(id);
             var dump = ObjectDumper.Dump(user);
             Console.WriteLine(dump);
         }
 
-        public static void getSearchResults(string q)
+        public static async void getSearchResults(string q)
         {
-            var results = dr.Search(q);
+            var results = await dr.SearchAsync(q);
             results.ForEach(r => Console.WriteLine(r.text));
         }
 
-        public static void getRandomRant()
+        public static async void getRandomRant()
         {
-            var dump = ObjectDumper.Dump(dr.GetRandomRant());
+            var dump = ObjectDumper.Dump(await dr.GetRandomRantAsync());
             Console.WriteLine(dump);
         }
 
         static void Main(string[] args)
         {
-            //getAllRants();
-            //getUserProfile(dr.GetUserId("px06"));
-            //getSearchResults("px06");
-            //getSingleRant(448369);
-
-            getRandomRant();
-            Console.WriteLine("-----------------------------------");
-            getUserProfile(dr.GetUserId("px06"));
+            getAllRants();
+            getSearchResults("px06");
+            getSingleRant(448369);
+            getUserProfile(getUserId("px06").Result);
 
             Console.ReadLine();
         }

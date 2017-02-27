@@ -12,18 +12,41 @@ using System.Threading.Tasks;
 
 namespace devRantDotNet
 {
+    /// <summary>
+    /// A C# Wrapper for the devRant API
+    /// </summary>
     public class devRant
     {
+
+        /// <summary>
+        /// Rant sort type
+        /// </summary>
         public enum SortType
         {
+            /// <summary>
+            /// Sorts using algo on devRant
+            /// </summary>
             algo,
+
+            /// <summary>
+            /// Sorts by top rants
+            /// </summary>
             top,
+
+            /// <summary>
+            /// Sorts by recent rants
+            /// </summary>
             recent
         }
 
-        private string MakeRequest(string url)
+        /// <summary>
+        /// Uses <see cref="HttpWebRequest"/> and <see cref="HttpWebResponse"/> to create requests to the API.
+        /// Returns the JSON result.
+        /// </summary>
+        /// <param name="url">The url of the endpoint</param>
+        /// <returns>The JSON Result</returns>
+        private async Task<string> MakeRequestAsync(string url)
         {
-
             // Set a default policy level for the "http:" and "https" schemes.
             HttpRequestCachePolicy policy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Default);
             HttpWebRequest.DefaultCachePolicy = policy;
@@ -37,7 +60,7 @@ namespace devRantDotNet
 
             request.ContentType = "application/json; charset=utf-8";
             string t;
-            var response = (HttpWebResponse)request.GetResponse();
+            var response = (HttpWebResponse)await request.GetResponseAsync();
 
             using(var sr = new StreamReader(response.GetResponseStream()))
             {
@@ -47,6 +70,11 @@ namespace devRantDotNet
             return t;
         }
 
+        /// <summary>
+        /// Converting the JSON received into a Rant object which is specified in <see cref="Rant"/>
+        /// </summary>
+        /// <param name="r">The JSON string received by the API containing the Rant</param>
+        /// <returns>A Rant object with the properties received</returns>
         private Rant JSONToRantObject(dynamic r)
         {
             var rant = new Rant
@@ -75,6 +103,11 @@ namespace devRantDotNet
 
         }
 
+        /// <summary>
+        /// Convert a comment on a rant to a Comment object as specified in <see cref="Comment"/>
+        /// </summary>
+        /// <param name="c">The JSON string received by the API containing the comment</param>
+        /// <returns>A Comment object with the received properties</returns>
         private Comment JSONToCommentObject(dynamic c)
         {
             Comment comment = new Comment()
@@ -101,9 +134,9 @@ namespace devRantDotNet
         /// </summary>
         /// <param name="type"> Type of sort e.g. Top, Algo or Recent</param>
         /// <returns>A List of Rants which are iterable</returns>
-        public List<Rant> GetRants(SortType type)
+        public async Task<List<Rant>> GetRantsAsync(SortType type)
         {
-            var req = MakeRequest(Values.AllRants+"?sort="+type+"&app=3");
+            var req = await MakeRequestAsync(Values.AllRants+"?sort="+type+"&app=3");
             dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
 
             if (results.success != "true")
@@ -124,11 +157,16 @@ namespace devRantDotNet
             return rants;
         }
 
-        public Rant GetRant(int id)
+        /// <summary>
+        /// Gets a single rant given the Id of it
+        /// </summary>
+        /// <param name="id">The Id of the rant that is being queried</param>
+        /// <returns>The Rant that is requested as a Rant object</returns>
+        public async Task<Rant> GetRantAsync(int id)
         {
             try
             {
-                var req = MakeRequest(Values.SingleRant + id + Values.AppId);
+                var req = await MakeRequestAsync(Values.SingleRant + id + Values.AppId);
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
                 var r = results.rant;
 
@@ -146,11 +184,16 @@ namespace devRantDotNet
             }
         }
 
-        public int GetUserId(string username)
+        /// <summary>
+        /// Gets the user Id given a username
+        /// </summary>
+        /// <param name="username">username of the person that the Id is wanted for</param>
+        /// <returns>The Id of the user with the username specified</returns>
+        public async Task<int> GetUserIdAsync(string username)
         {
             try
             {
-                var req = MakeRequest(Values.UsernameById + "?username=" + username + "&app=3");
+                var req = await MakeRequestAsync(Values.UsernameById + "?username=" + username + "&app=3");
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
 
                 if (results.success != "true")
@@ -164,11 +207,16 @@ namespace devRantDotNet
             catch { return 0; }
         }
 
-        public User GetProfile(long id)
+        /// <summary>
+        /// Gets a user profile with all the rants and other info associated with it
+        /// </summary>
+        /// <param name="id">Id of the user</param>
+        /// <returns>The User object with all the user-info and rants</returns>
+        public async Task<User> GetProfileAsync(long id)
         {
             try
             {
-                var req = MakeRequest(Values.User + id + Values.AppId);
+                var req = await MakeRequestAsync(Values.User + id + Values.AppId);
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
                 var profile = results.profile;
                 if(results.success != "true")
@@ -221,11 +269,16 @@ namespace devRantDotNet
             }
         }
 
-        public List<Rant> Search(string term)
+        /// <summary>
+        /// Allows to search the devRant website
+        /// </summary>
+        /// <param name="term">The term to search with</param>
+        /// <returns>A List of rants matching the search terms</returns>
+        public async Task<List<Rant>> SearchAsync(string term)
         {
             try
             {
-                var req = MakeRequest(Values.Search + "?term=" + term + "&app=3");
+                var req = await MakeRequestAsync(Values.Search + "?term=" + term + "&app=3");
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
 
                 if (results.success != "true")
@@ -249,11 +302,15 @@ namespace devRantDotNet
             }
         }
 
-        public Rant GetRandomRant()
+        /// <summary>
+        /// SURPRISE!!!
+        /// </summary>
+        /// <returns>A random rant as a Rant object</returns>
+        public async Task<Rant> GetRandomRantAsync()
         {
             try
             {
-                var req = MakeRequest(Values.Random + Values.AppId);
+                var req = await MakeRequestAsync(Values.Random + Values.AppId);
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
 
                 return results.success == "true" ? JSONToRantObject(results.rant) : null;
