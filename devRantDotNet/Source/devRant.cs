@@ -1,4 +1,5 @@
-﻿using devRantDotNet.Source.Models;
+﻿using devRantDotNet.Source;
+using devRantDotNet.Source.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace devRantDotNet
     /// <summary>
     /// A C# Wrapper for the devRant API
     /// </summary>
-    public class devRant : IDisposable
+    public class devRant : IDisposable, IdevRant
     {
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace devRantDotNet
             /// </summary>
             recent
         }
-        
+
         /// <summary>
         /// Uses <see cref="HttpWebRequest"/> and <see cref="HttpWebResponse"/> to create requests to the API.
         /// Returns the JSON result.
@@ -62,7 +63,7 @@ namespace devRantDotNet
             string t;
             var response = (HttpWebResponse)await request.GetResponseAsync();
 
-            using(var sr = new StreamReader(response.GetResponseStream()))
+            using (var sr = new StreamReader(response.GetResponseStream()))
             {
                 t = sr.ReadToEnd();
             }
@@ -133,10 +134,12 @@ namespace devRantDotNet
         /// Returns all the rants from the feed at: https://www.devrant.io/feed
         /// </summary>
         /// <param name="type"> Type of sort e.g. Top, Algo or Recent</param>
+        /// <param name="limit">The amount of rants to load</param>
+        /// <param name="skip">Skips n amount of rants, useful for paging</param>
         /// <returns>A List of Rants which are iterable</returns>
-        public async Task<List<Rant>> GetRantsAsync(SortType type)
+        public async Task<List<Rant>> GetRantsAsync(SortType type, int limit = 30, int skip = 10)
         {
-            var req = await MakeRequestAsync(Values.AllRants+"?sort="+type+"&app=3");
+            var req = await MakeRequestAsync($"{Values.AllRants}?sort={type}&limit={limit}&skip={skip}&{Values.AppId}");
             dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
 
             if (results.success != "true")
@@ -146,7 +149,7 @@ namespace devRantDotNet
 
             List<Rant> rants = new List<Rant>();
 
-            for(int i = 0; i<results.rants.Count; i++)
+            for (int i = 0; i < results.rants.Count; i++)
             {
                 var r = results.rants[i];
                 Rant rant = JSONToRantObject(r);
@@ -166,7 +169,7 @@ namespace devRantDotNet
         {
             try
             {
-                var req = await MakeRequestAsync(Values.SingleRant + id + Values.AppId);
+                var req = await MakeRequestAsync($"{Values.SingleRant}{id}?{Values.AppId}");
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
                 var r = results.rant;
 
@@ -178,7 +181,8 @@ namespace devRantDotNet
                     rant.rant_comments.Add(JSONToCommentObject(current));
                 }
                 return rant;
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return null;
             }
@@ -193,7 +197,7 @@ namespace devRantDotNet
         {
             try
             {
-                var req = await MakeRequestAsync(Values.UsernameById + "?username=" + username + "&app=3");
+                var req = await MakeRequestAsync($"{Values.UsernameById}?username={username}&{Values.AppId}");
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
 
                 if (results.success != "true")
@@ -216,10 +220,10 @@ namespace devRantDotNet
         {
             try
             {
-                var req = await MakeRequestAsync(Values.User + id + Values.AppId);
+                var req = await MakeRequestAsync($"{Values.User}{id}?{Values.AppId}");
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
                 var profile = results.profile;
-                if(results.success != "true")
+                if (results.success != "true")
                 {
                     throw new Exception("Something went wrong!");
                 }
@@ -234,7 +238,8 @@ namespace devRantDotNet
                 user.github = profile.github;
                 user.website = profile.website;
 
-                for (var i = 0; i < profile.content.content.rants.Count; i++){
+                for (var i = 0; i < profile.content.content.rants.Count; i++)
+                {
                     user.rants.Add(JSONToRantObject(profile.content.content.rants[i]));
                 }
 
@@ -243,12 +248,12 @@ namespace devRantDotNet
                     user.upvoted.Add(JSONToRantObject(profile.content.content.upvoted[i]));
                 }
 
-                for(var i = 0; i < profile.content.content.comments.Count; i++)
+                for (var i = 0; i < profile.content.content.comments.Count; i++)
                 {
                     user.comments.Add(JSONToCommentObject(profile.content.content.comments[i]));
                 }
 
-                for(var i = 0; i < profile.content.content.favorites.Count; i++)
+                for (var i = 0; i < profile.content.content.favorites.Count; i++)
                 {
                     user.favorites.Add(JSONToRantObject(profile.content.content.favorites[i]));
                 }
@@ -278,7 +283,7 @@ namespace devRantDotNet
         {
             try
             {
-                var req = await MakeRequestAsync(Values.Search + "?term=" + term + "&app=3");
+                var req = await MakeRequestAsync($"{Values.Search}?term={term}&{Values.AppId}");
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
 
                 if (results.success != "true")
@@ -310,7 +315,7 @@ namespace devRantDotNet
         {
             try
             {
-                var req = await MakeRequestAsync(Values.Random + Values.AppId);
+                var req = await MakeRequestAsync($"{Values.Random}?{Values.AppId}");
                 dynamic results = JsonConvert.DeserializeObject<dynamic>(req);
 
                 return results.success == "true" ? JSONToRantObject(results.rant) : null;
