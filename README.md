@@ -10,6 +10,15 @@ This is a library written in C#.NET for access to the devRant API. It aims to pr
 
 - .NET Framework 4+
 
+# Installation
+
+The easiest way to install devRantDotNet is using nuget, run the following command in the [Package Manager Console](https://docs.nuget.org/docs/start-here/using-the-package-manager-console)
+```
+    PM> Install-Package redrails.devRantDotNet
+```
+
+If you want to run from source then you can clone this repository and add it as a reference in your project.
+
 # Getting started
 
 ```
