@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>redrails.devRantDotNet</id>
+    <version>$version$</version>
+    <title>devRantDotNet</title>
+    <description>An Un-Official C# wrapper library for the devRant API containing all public API methods.</description>
+    <authors>redrails</authors>
+    <owners>redrails</owners>
+    <projectUrl>https://github.com/redrails/devRantDotNet</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/redrails/devRantDotNet/master/icon.png</iconUrl>
+    <tags>devrant unofficial public api wrapper class implementation web social</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="10.0" />
+    </dependencies>
+  </metadata>
+</package>

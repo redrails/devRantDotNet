@@ -53,6 +53,9 @@
     <Compile Include="Source\Resources\Values.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="devRantDotNet.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
