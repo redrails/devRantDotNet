@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IdevRant.cs" />
+    <Compile Include="Source\IdevRant.cs" />
     <Compile Include="Source\devRant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Models\Comment.cs" />
