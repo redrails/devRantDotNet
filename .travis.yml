@@ -1,4 +1,8 @@
 language: csharp
+
+script:
+  - xbuild /p:Configuration=Debug devRantDotNet.sln
+
 solution: devRantDotNet.sln
 
 before_install:
@@ -9,4 +13,3 @@ before_script:
 
 after_script:
   - nunit-console Tests/bin/Release/Tests.dll
-  
