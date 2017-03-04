@@ -1,3 +1,7 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/yd6s0ji4rm67mwhr?svg=true)](https://ci.appveyor.com/project/redrails/devrantdotnet) [![NuGet](https://buildstats.info/nuget/redrails.devRantDotNet)](https://www.nuget.org/packages/redrails.devRantDotNet/)
+
+
+
 Unofficial C# Wrapper for the [devRant](https://www.devrant.io/) public API.
 
 ![](https://www.devrant.io/static/devrant/img/landing/landing-avatars2.png)
