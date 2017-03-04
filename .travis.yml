@@ -9,3 +9,4 @@ before_script:
 
 after_script:
   - nunit-console Tests/bin/Release/Tests.dll
+  
