@@ -18,7 +18,7 @@ namespace devRantDotNet.Tests
         [TestMethod]
         public void GetRantAsyncTest()
         {
-            int id = 450227;
+            int id = 867850;
             var result = dr.GetRantAsync(id).Result;
             Assert.AreEqual("px06", result.user_username);
         }
@@ -38,7 +38,6 @@ namespace devRantDotNet.Tests
             var result = dr.GetProfileAsync(id).Result;
             Assert.AreEqual("redrails", result.github);
             Assert.AreEqual("px06", result.username);
-            Assert.IsTrue(result.rants.Find(x => x.id == 450227).tags.Contains("c#"));
         }
 
         [TestMethod]
@@ -53,7 +52,7 @@ namespace devRantDotNet.Tests
         public void GetRandomRantAsyncTest()
         {
             var result = dr.GetRandomRantAsync().Result;
-            Assert.IsTrue(result.num_upvotes >= 20);
+            Assert.IsTrue(result.score >= 20);
         }
 
     }
