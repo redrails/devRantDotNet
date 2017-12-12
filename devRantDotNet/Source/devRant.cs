@@ -82,8 +82,6 @@ namespace devRantDotNet
             {
                 id = r.id,
                 text = r.text,
-                num_upvotes = r.num_upvotes,
-                num_downvotes = r.num_downvotes,
                 score = r.score,
                 created_time = r.created_time,
                 num_comments = r.num_comments,
@@ -116,8 +114,6 @@ namespace devRantDotNet
                 id = c.id,
                 rant_id = c.rant_id,
                 body = c.body,
-                num_upvotes = c.num_upvotes,
-                num_downvotes = c.num_downvotes,
                 score = c.score,
                 created_time = c.created_time,
                 vote_state = c.vote_state,
