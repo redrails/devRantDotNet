@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>redrails.devRantDotNet</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>devRantDotNet</title>
     <description>An Un-Official C# wrapper library for the devRant API containing all public API methods.</description>
     <authors>redrails</authors>
