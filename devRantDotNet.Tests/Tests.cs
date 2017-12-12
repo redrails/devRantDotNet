@@ -52,7 +52,7 @@ namespace devRantDotNet.Tests
         public void GetRandomRantAsyncTest()
         {
             var result = dr.GetRandomRantAsync().Result;
-            Assert.IsTrue(result.score >= 20);
+            Assert.IsTrue(!string.IsNullOrEmpty(result.text));
         }
 
     }
