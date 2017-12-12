@@ -8,7 +8,7 @@ namespace devRantDotNet
 {
     internal static class Values
     {
-        internal const string API = "https://www.devrant.io/api";
+        internal const string API = "https://devrant.com/api";
         internal const string AppId = "app=3";
         internal const string UsernameById = API + "/get-user-id";
         internal const string AllRants = API + "/devrant/rants";
