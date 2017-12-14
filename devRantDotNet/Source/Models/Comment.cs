@@ -11,8 +11,6 @@ namespace devRantDotNet.Source.Models
         public long id { get; set; }
         public long rant_id { get; set; }
         public string body { get; set; }
-        public int num_upvotes { get; set; }
-        public int num_downvotes { get; set; }
         public int score { get; set; }
         public long created_time { get; set; }
         public int vote_state { get; set; }
