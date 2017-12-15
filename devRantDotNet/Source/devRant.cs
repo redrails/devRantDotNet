@@ -83,6 +83,8 @@ namespace devRantDotNet
                 id = r.id,
                 text = r.text,
                 score = r.score,
+                rt = r.rt,
+                rc = r.rc,
                 created_time = r.created_time,
                 num_comments = r.num_comments,
                 tags = r.tags.ToObject<List<string>>(),

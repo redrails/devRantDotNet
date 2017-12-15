@@ -15,6 +15,8 @@ namespace devRantDotNet.Source.Models
         public long id { get; set; }
         public string text { get; set; }
         public int score { get; set; }
+        public int rt { get; set; }
+        public int rc { get; set; }
         public long created_time { get; set; }
         public string attachedImageUrl { get; set; }
         public int num_comments { get; set; }
